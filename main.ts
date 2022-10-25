@@ -8,11 +8,16 @@ new Curso("Principios de diseño y arquitectura", 30, 75, true, 2020)
 ]
 export const ap = new Aprendiz("Juan Pablo", "Reyes Gómez", "avatar.png", 30, NivelEducativo.POSTGRADO, cursos);
 
-let apredizTable: HTMLElement = document.getElementById("aprendiz")!; //El elemento no es nulo no hay riesgo de que sea nulo porque ya existe
-let estadisticasTable: HTMLElement = document.getElementById("estadisticas")!; //El elemento no es nulo no hay riesgo de que sea nulo porque ya existe
+//El elemento no es nulo no hay riesgo de que sea nulo porque ya existe
+let apredizTable: HTMLElement = document.getElementById("aprendiz")!;
+//El elemento no es nulo no hay riesgo de que sea nulo porque ya existe
+let estadisticasTable: HTMLElement = document.getElementById("estadisticas")!;
+//El elemento no es nulo no hay riesgo de que sea nulo porque ya existe
+let cursosTable: HTMLElement = document.getElementById("cursos")!;
 
 mostrarDatosAprendiz(ap);
 mostrarEstadisticas(ap);
+mostrarCursosAprendiz(ap);
 
 function mostrarDatosAprendiz(aprendiz: Aprendiz): void{
     let tbodyAprendiz = document.createElement("tbody");
@@ -30,4 +35,20 @@ function mostrarEstadisticas(aprendiz: Aprendiz): void{
     let trElement:HTMLElement = document.createElement("tr");
     trElement.innerHTML = `<td><b>Cursos certificados</b></td><td>${numeroCertificados}</td>`
     estadisticasTable.appendChild(trElement);
+}
+
+function mostrarCursosAprendiz(aprendiz: Aprendiz): void{
+    let cursosTBody: HTMLElement = document.createElement("tbody");
+    for(let curso of aprendiz.cursos)
+    {
+        let trElement: HTMLElement = document.createElement("tr");
+        trElement.innerHTML = `<td>${curso.nombre}</td>
+        <td>${curso.horas}</td>
+        <td>${curso.calificacion}</td>
+        <td>${curso.certificado}</td>
+        <td>${curso.anio}</td>
+        `
+        cursosTBody.appendChild(trElement)
+    }
+    cursosTable.appendChild(cursosTBody)
 }
